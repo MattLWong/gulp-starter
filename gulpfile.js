@@ -1,18 +1,18 @@
 // ////////////////////////////////////////////////
 //
 // EDIT CONFIG OBJECT BELOW !!!
-// 
+//
 // jsConcatFiles => list of javascript files (in order) to concatenate
 // buildFilesFoldersRemove => list of files to remove when running final build
 // // //////////////////////////////////////////////
 
 var config = {
 	jsConcatFiles: [
-		'./app/js/module1.js', 
+		'./app/js/module1.js',
 		'./app/js/main.js'
-	], 
+	],
 	buildFilesFoldersRemove:[
-		'build/scss/', 
+		'build/scss/',
 		'build/js/!(*.min.js)',
 		'build/bower.json',
 		'build/bower_components/',
@@ -59,7 +59,7 @@ gulp.task('scripts', function() {
 		.pipe(concat('temp.js'))
 		.pipe(uglify())
 		.on('error', errorlog)
-		.pipe(rename('app.min.js'))		
+		.pipe(rename('app.min.js'))
     .pipe(sourcemaps.write('../maps'))
     .pipe(gulp.dest('./app/js/'))
 
@@ -74,16 +74,16 @@ gulp.task('scripts', function() {
 gulp.task('styles', function() {
 	gulp.src('app/scss/style.scss')
 		.pipe(sourcemaps.init())
-			.pipe(sass({outputStyle: 'compressed'}))
-			.on('error', errorlog)
-			.pipe(autoprefixer({
+		.pipe(sass({outputStyle: 'compressed'}))
+		.on('error', errorlog)
+		.pipe(autoprefixer({
 	            browsers: ['last 3 versions'],
 	            cascade: false
-	        }))	
+	        }))
 		.pipe(sourcemaps.write('../maps'))
-		.pipe(gulp.dest('app/css'))
+		.pipe(gulp.dest('app/css' ))
 		.pipe(reload({stream:true}));
-});
+});   
 
 
 // ////////////////////////////////////////////////
@@ -151,7 +151,7 @@ gulp.task('build', ['build:copy', 'build:remove']);
 gulp.task ('watch', function(){
 	gulp.watch('app/scss/**/*.scss', ['styles']);
 	gulp.watch('app/js/**/*.js', ['scripts']);
-  	gulp.watch('app/**/*.html', ['html']);
+  gulp.watch('app/**/*.html', ['html']);
 });
 
 
